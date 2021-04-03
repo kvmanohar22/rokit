@@ -2,9 +2,9 @@
 
 This is a collation of few specific implementation for SLAM / VO / VIO. In particular the package implements the following:
 
-- [sparse image alignment](vikit/include/vikit/image_alignment.h): Estimates 6-DoF rigid body camera motion using direct image alignment.
-- TODO: [semi-dense image alignment](vikit/include/vikit/semi_dense_image_alignment.h).
-- TODO: [dense image alignment](vikit/include/vikit/dense_image_alignment.h).
+- [sparse image alignment](include/vikit/image_alignment.h): Estimates 6-DoF rigid body camera motion using direct image alignment. The method is very efficient since it leverages inverse-compositional Lucas-Kanade for warping the image patches parameterized by 6-DoF rigid body transformation. This results in constant jacobian throughout all the iterations and thereby reducing the computational complexity drastically.
+- TODO: semi-dense image alignment
+- TODO: dense image alignment
 
 
 ## Analysis
