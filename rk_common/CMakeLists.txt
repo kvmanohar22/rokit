@@ -1,0 +1,40 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
+PROJECT(rk_common)
+
+SET(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -O3")
+SET(CMAKE_BUILD_TYPE Release)
+
+FIND_PACKAGE(OpenCV REQUIRED)
+FIND_PACKAGE(Eigen3 REQUIRED)
+FIND_PACKAGE(Sophus REQUIRED)
+FIND_PACKAGE(catkin REQUIRED COMPONENTS
+  roscpp
+  cv_bridge
+  image_transport
+)
+INCLUDE_DIRECTORIES(
+  include
+  ${catkin_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIRS}
+  ${SOPHUS_INCLUDE_DIRS}
+)
+
+catkin_package(
+  DEPENDS OpenCV Eigen3 Sophus
+  CATKIN_DEPENDS roscpp cv_bridge image_transport
+  INCLUDE_DIRS include
+  LIBRARIES rk_common
+)
+
+ADD_LIBRARY(rk_common SHARED
+  src/utils.cpp
+  src/pinhole_camera.cpp
+)
+LIST(APPEND LINK_LIBS
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBRARIES}
+   ${SOPHUS_LIBRARIES}
+)
+TARGET_LINK_LIBRARIES(rk_common ${LINK_LIBS})
