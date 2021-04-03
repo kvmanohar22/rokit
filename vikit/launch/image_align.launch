@@ -1,0 +1,12 @@
+<launch>
+    <env name="ROSCONSOLE_CONFIG_FILE" value="$(find rk_common)/cfg/rosconsole.conf"/>
+
+    <!-- start node -->
+    <node pkg="vikit" type="test_image_align" name="img_align" output="screen">
+      <param name="data_dir"        value="/mnt/kv/slam/datasets/rpg_synthetic_city/"/>
+      <param name="ref_img_idx"     value="img0001"/>
+      <param name="verbose"         value="false"/>
+      <param name="n_curr_frames"   value="30"/>
+      <param name="results_file"    value="/tmp/alignment.csv"/>
+    </node>
+</launch>
